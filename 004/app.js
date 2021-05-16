@@ -9,7 +9,7 @@ const app = Vue.createApp({
 	methods: {
 		changeTitle() {
 			console.log(this)
-			this.title = 'Изменили!'
+			this.title = 'Изменили'
 		}
 	},
 	// template: `
@@ -17,80 +17,58 @@ const app = Vue.createApp({
 	// 		<h1>{{ title }}</h1>
 	// 		<button class="btn" @click="title = 'Изменили!'">Изменить</button>
 	// 	</div>
-	// `,
+	// `
 	render() {
 		return h('div', {
-			class: 'card center'
+			className: 'card center'
 		}, [
 			h('h1', {}, this.title),
 			h('button', {
-				class: 'btn',
+				className: 'btn',
 				onClick: this.changeTitle
-			}, 'Изменить')
+			}, 'Изменить'),
 		])
 	},
-	beforeCreate() {
-		console.log('beforeCreate')
-	},
-	created() {
-		console.log('created')
-	},
-	beforeMount() {
-		console.log('beforeMount')
-	},
-	mounted() {
-		console.log('mounted')
-	},
-	beforeUnmount() {
-		console.log('beforeUnmount')
-	},
-	unmounted() {
-		console.log('unmounted')
-	},
-	beforeUpdate() {
-		console.log('beforeUpdate')
-	},
-	updated() {
-		console.log('updated')
-	},
-});
+})
 
 app.mount('#app')
 
 Vue.createApp({
 	data() {
 		return {
-			title: 'New title 2'
+			title: 'New Title 2'
 		}
 	}
 }).mount('#app2')
 
-// =========
-
 let title = 'Vue 3'
-let message = 'Заголовок это: ' + title
+let message = `Заголовок это: ${title}`
 
 // console.log(message)
 //
-// title = ' Angular 10'
+// title = 'Angular 10'
+// console.log(message)
 
 const data = {
 	title: 'Vue 3',
-	message: 'Заголовок это: Vue 3'
+	message: `Заголовок это: Vue 3`
 }
 
+console.log(data)
+
 const proxy = new Proxy(data, {
-	// get(target, p) {
-	// 	console.log(target)
-	// 	console.log(p)
-	// },
+	get(target, p) {
+		console.log(target)
+		console.log(p)
+	},
 	set(target, key, value) {
 		if (key === 'title') {
 			target.message = 'Заголовок это: ' + value
 		}
 		target[key] = value
-	},
+	}
 })
 
 proxy.title = 'Angular 10'
-// console.log(proxy)
+
+console.log(proxy)

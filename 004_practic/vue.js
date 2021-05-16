@@ -18,12 +18,21 @@ const App = {
   methods: {
     prev() {
       // когда нажимаем кнопку назад
+      if (this.activeIndex > 0) {
+        this.activeIndex--;
+        console.log(this.activeIndex);
+      }
     },
     reset() {
       // начать заного
+
     },
     nextOfFinish() {
       // кнопка вперед или закончить
+      if (this.activeIndex < 4) {
+        this.activeIndex++;
+        console.log(this.activeIndex);
+      }
     },
     setActive(idx) {
       // когда нажимаем на определенный шаг
