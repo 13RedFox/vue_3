@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vue Basics</title>
+  <title>Vue Basic</title>
   <link rel="stylesheet" href="theme.css"/>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,27 +13,31 @@
   <div class="card">
     <h1>{{ title }}</h1>
     <div class="form-control">
-      <input
-          type="text"
-          :placeholder="placeholderString"
-          v-model="inputValue"
-          @keypress.enter="addNewNote"
-      />
-      <span>Символов уже использовано: {{inputValue.length}} </span>
+      <label>
+        <span v-if="inputValue.length > 0">Длинна вашей заметки: {{inputValue.length}}</span>
+        <span v-else>Введите заметку не длиннее 30 символов.</span>
+        <input
+            type="text"
+            :placeholder="placeholderString"
+            v-model="inputValue"
+            @keypress.enter="addNewNotes"
+        />
+      </label>
     </div>
-    <button class="btn primary" @click="addNewNote">Добавить</button>
-    <hr>
+    <button class="btn" @click="addNewNotes">Add</button>
+    <hr/>
     <ul class="list" v-if="notes.length !== 0">
-      <li class="list-item" v-for="(note, idx) in notes">
-        {{ idx + 1 }}. {{ toUpperCase(note) }}
-        <button class="btn danger" @click="removeNote(idx)">удалить</button>
+      <li class="list-item" v-for="(note, idx) in notes" :key="note">
+        {{ idx + 1}}. {{ note }}
+        <button class="btn danger" @click="removeNewNotes(idx)">delete</button>
       </li>
-      <hr />
+      <hr>
       <li>
-        <strong>Общее количество заметок: {{ notes.length }}</strong>
+        <strong>Общее количество заметок: {{notes.length}}</strong>
       </li>
+
     </ul>
-    <div v-else> Заметок пока нет... может добавим первую?</div>
+    <h2 v-else>Заметок пока нету, добавьте первую заметку!</h2>
   </div>
 </div>
 
